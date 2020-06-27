@@ -6,7 +6,7 @@ fun computeFibbonaciNumber(position: Int?, recursion: Boolean = false): Int {
         notNullPosition = 1
     }
 
-    if (recursion) return recursiveFibbonachi(1, 1, notNullPosition - 2)
+    if (recursion) return recursiveFibbonachi(notNullPosition)
 
     if (notNullPosition == 0) return 0
     if (notNullPosition < 0) {
@@ -35,11 +35,13 @@ fun computeNegativeFibbonachi(position:Int): Int {
     return if (resultIsNegative) (absoluteResult * -1) else absoluteResult
 }
 
-fun recursiveFibbonachi(previous: Int, current: Int, stepsLeft: Int): Int {
-    if (stepsLeft < 0) return 1
-    return when (stepsLeft) {
-        0 -> current
-        else -> recursiveFibbonachi(current, previous + current, stepsLeft - 1)
+fun recursiveFibbonachi(initialPosition: Int, left: Int = 0, right: Int = 1, position: Int = initialPosition): Int {
+    if (initialPosition == 0) return 0
+    if (position == 0) return left
+    if (initialPosition > 0) {
+        return recursiveFibbonachi(initialPosition, right, left + right, position - 1)
+    } else {
+        return recursiveFibbonachi(initialPosition, right - left, left, position + 1)
     }
 }
 fun computeFibbonachiArray(start: Int, end: Int, efficient: Boolean = false): List<Int> {
