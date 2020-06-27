@@ -8,6 +8,12 @@ fun computeFibbonaciNumber(position: Int?, recursion: Boolean = false): Int {
 
     if (recursion) return recursiveFibbonachi(1, 1, notNullPosition - 2)
 
+    if (notNullPosition == 0) return 0
+    if (notNullPosition < 0) {
+        val positionIsOdd = notNullPosition % 2 == -1
+        return if (positionIsOdd) computeFibbonaciNumber(-notNullPosition) else (computeFibbonaciNumber(-notNullPosition) * -1)
+    }
+
     var i = 1
     var j = 1
 
